@@ -20,7 +20,7 @@
 <br>
 Ознакомиться и протестировать эндпоинты можно в Swagger . 
 Доступно по  : 
-(https://test.vhospice.org/api/fmh/swagger-ui/index.html#)
+
 <br>
 <br>
 Приложение запускается на порте 8090
