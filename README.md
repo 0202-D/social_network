@@ -19,8 +19,8 @@
 <br>
 <br>
 Ознакомиться и протестировать эндпоинты можно в Swagger . 
-Доступно по  :[a link](http://localhost:8090/swagger-ui/index.html#)
-<a href="http://localhost:8090/swagger-ui/index.html#">swagger<a>
+Доступно по  :  
+<a href="http://localhost:8090/swagger-ui/index.html#">http://localhost:8090/swagger-ui/index.html#<a>
 <br>
 <br>
 Приложение запускается на порте 8090 
