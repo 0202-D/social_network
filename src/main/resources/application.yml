@@ -1,3 +1,5 @@
+server:
+  port: 8090
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
@@ -6,21 +8,19 @@ spring:
   jpa:
     open-in-view: false
     database-platform: org.hibernate.dialect.PostgreSQL95Dialect
-    show-sql: false
+    show-sql: true
     properties:
       hibernate:
         jdbc:
           lob.non_contextual_creation: true
         format_sql: true
   flyway:
-    locations: classpath:db/migration/dev
-server:
-  servlet:
-    context-path: /fmh
-  forward-headers-strategy: framework
+    locations: classpath:db/migration/
+    validate-migration-naming: true
+
 logging:
   level:
-    ru.iteco.fmh: DEBUG
+    ru.effectivemobile: DEBUG
 
 springdoc:
   swagger-ui:
@@ -29,9 +29,8 @@ springdoc:
 
 swagger:
   info:
-    title: "API ?????????? ????"
-    description: "Backend ?????? ??? ?????????? «?????????? ????»"
+    title: "API Social Network"
+    description: "Backend for api social networkï¿½"
   security:
     schemeName: "Authorization"
     format: "JWT"
-
