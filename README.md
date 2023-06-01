@@ -19,7 +19,7 @@
 <br>
 <br>
 Ознакомиться и протестировать эндпоинты можно в Swagger . 
-Доступно по  : 
+Доступно по  : (http://localhost:8090/swagger-ui/index.html#)
 
 <br>
 <br>
