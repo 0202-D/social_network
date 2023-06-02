@@ -2,13 +2,11 @@ package ru.effectivemobile.social_network.service.user;
 
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.mockito.*;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import ru.effectivemobile.social_network.dao.FriendRepository;
 import ru.effectivemobile.social_network.dao.UserRepository;
@@ -34,13 +32,6 @@ public class UserServiceImplTest {
 
     @Mock
     private FriendRepository friendRepository;
-
-
-    @Mock
-    private SecurityContext securityContext;
-
-    @Mock
-    private Authentication authentication;
 
     @InjectMocks
     private UserServiceImpl userService;
