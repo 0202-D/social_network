@@ -13,4 +13,6 @@ public interface PostRepository extends JpaRepository<Post,Long> {
 
     @Query(value = "select p from  Post p where p.user.id=:userId order by p.createdAt desc")
     List<Post> findAllByUserId(long userId, PageRequest of);
+
+
 }

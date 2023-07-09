@@ -32,7 +32,6 @@ public class WebSecurityConfig {
         http.cors().and().csrf().disable()
                 .authorizeRequests()
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
-                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                 .antMatchers("/authentication/login", "/authentication/registration").permitAll()
                 .antMatchers(
                         "/v3/api-docs/**",

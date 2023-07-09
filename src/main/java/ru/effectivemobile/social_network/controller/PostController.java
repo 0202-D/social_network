@@ -11,7 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
 import ru.effectivemobile.social_network.dto.post.CreatePostRequest;
 import ru.effectivemobile.social_network.dto.post.ShowPostResponse;
 import ru.effectivemobile.social_network.dto.post.UpdatePostRequest;
-import ru.effectivemobile.social_network.model.Post;
 import ru.effectivemobile.social_network.service.post.PostService;
 
 import javax.validation.constraints.Max;

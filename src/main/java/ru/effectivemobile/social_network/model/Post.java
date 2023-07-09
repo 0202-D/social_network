@@ -1,10 +1,7 @@
 package ru.effectivemobile.social_network.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.apache.commons.lang3.builder.ToStringExclude;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 

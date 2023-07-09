@@ -19,10 +19,12 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final FriendRepository friendRepository;
 
+    private static final String notFriendClaimExceptionMessage = "У этого пользователя нет этой заявки в друзья ";
+
     @Override
     @Transactional
     public void createFriendClaim(long userId) {
-        User firstUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User firstUser = getCurrentUser();
         User secondUser = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException("Пользователя с таким id не существует"));
         Friend friend = Friend.builder()
@@ -37,9 +39,9 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void confirmFriend(long userId) {
-        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = getCurrentUser();
         Friend friend = friendRepository.findBySecondUserIdAndFirstUserId(currentUser.getId(),userId)
-                .orElseThrow(() -> new NotFoundException("У этого пользователя нет этой заявки в друзья "));
+                .orElseThrow(() -> new NotFoundException(notFriendClaimExceptionMessage));
         if (friend.getStatus() != NEW) {
             throw new IncorrectDataException("У Вас нет новых заявок в друзью");
         }
@@ -57,9 +59,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void rejectFriend(long userId) {
-        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = getCurrentUser();
         Friend friend = friendRepository.findBySecondUserIdAndFirstUserId(currentUser.getId(),userId)
-                .orElseThrow(() -> new NotFoundException("У этого пользователя нет этой заявки в друзья "));
+                .orElseThrow(() -> new NotFoundException(notFriendClaimExceptionMessage));
         if (friend.getStatus() != NEW) {
             throw new IncorrectDataException("У Вас нет новых заявок в друзью");
         }
@@ -70,14 +72,17 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void removeFriend(long userId) {
-        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = getCurrentUser();
         Friend secondFriend = friendRepository.findBySecondUserIdAndFirstUserId(currentUser.getId(),userId)
-                .orElseThrow(() -> new NotFoundException("У этого пользователя нет этой заявки в друзья "));
+                .orElseThrow(() -> new NotFoundException(notFriendClaimExceptionMessage));
        Friend friend = friendRepository.findBySecondUserIdAndFirstUserId(userId, currentUser.getId())
-               .orElseThrow(() -> new NotFoundException("У этого пользователя нет этой заявки в друзья "));
+               .orElseThrow(() -> new NotFoundException(notFriendClaimExceptionMessage));
        friendRepository.delete(friend);
        secondFriend.setStatus(REJECTED);
        friendRepository.save(secondFriend);
+    }
+    private static User getCurrentUser(){
+        return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 }
 
